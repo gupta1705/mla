@@ -11,11 +11,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Nunito:wght@600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
 <script>
-  // Runs before paint: returning visits skip straight to the world.
+  // Runs before paint: every visit starts at the particle bunny.
   (function () {
-    var r = document.documentElement, opened = null, night = null;
-    try { opened = localStorage.getItem('opened'); night = localStorage.getItem('night'); } catch (e) {}
-    r.setAttribute('data-stage', opened ? 'world' : 'intro');
+    var r = document.documentElement, night = null;
+    try { night = localStorage.getItem('night'); } catch (e) {}
+    r.setAttribute('data-stage', 'intro');
     if (night) r.setAttribute('data-night', '');
   })();
 </script>
@@ -625,7 +625,6 @@
     function enterWorld() {
       introOn = false;
       root.setAttribute('data-stage', 'world');
-      store.set('opened', '1');
       document.querySelector('meta[name=theme-color]').content = '#8F88BC';
       startWorld(true);
       $('flash').classList.add('out');
@@ -843,7 +842,7 @@
       syncNight();
     });
     syncNight();
-    $('replayBtn').addEventListener('click', function () { store.del('opened'); location.reload(); });
+    $('replayBtn').addEventListener('click', function () { location.reload(); });
 
     /* Nurse Bun */
     var bunPile = [];
