@@ -639,10 +639,21 @@
       setTimeout(function () { $('flash').style.opacity = 1; }, 1000);
       setTimeout(enterWorld, 1400);
     });
-    if (introOn) {
+    /* A background tab or in-app browser can report a zero-size window at load,
+       so the bunny waits until there is actually a screen to draw on. */
+    var introStarted = false;
+    var beginIntro = function () {
+      if (introStarted || !introOn) return;
+      if (innerWidth < 1 || innerHeight < 1) { setTimeout(beginIntro, 150); return; }
+      introStarted = true;
       buildParticles();
       if (calm) drawParticles(0); else requestAnimationFrame(introFrame);
-      window.addEventListener('resize', function () { if (introOn && !collapsing) { buildParticles(); if (calm) drawParticles(0); } });
+    };
+    if (introOn) {
+      beginIntro();
+      window.addEventListener('resize', function () {
+        if (introStarted && introOn && !collapsing && innerWidth > 0 && innerHeight > 0) { buildParticles(); if (calm) drawParticles(0); }
+      });
     }
 
     /* ---------- Stage 2: the card sphere ---------- */
