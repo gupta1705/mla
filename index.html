@@ -520,7 +520,7 @@
 <script>
   /* ======= EDIT THESE ======= */
   var CONFIG = {
-    fromName: '',    // your name, for the sign-off. Leave blank for "me".
+    fromName: 'Vedansh',    // your name, for the sign-off. Leave blank for "me".
     whatsapp: ''     // your number with country code and digits only, e.g. '919800000000'.
                      // Blank means Room service copies the message instead of opening WhatsApp.
   };
@@ -561,7 +561,7 @@
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function shuffled(a) { return a.slice().sort(function () { return Math.random() - .5; }); }
 
-    if (CONFIG.fromName) $('signoff').textContent = '— ' + CONFIG.fromName;
+    if (CONFIG.fromName) $('signoff').textContent = 'from ' + CONFIG.fromName;
 
     /* ---------- Stage 1: gold particles shaped like a bunny ---------- */
     var pc = $('particles'), px = pc.getContext('2d'), parts = [], W = 0, H = 0, cx = 0, cy = 0;
